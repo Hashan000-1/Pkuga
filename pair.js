@@ -595,7 +595,7 @@ socket.sendMessage(from, buttonMessage, { quoted: msg });
     }
 
     try {
-        const url = `http://206.189.94.231:8000/code?number=${encodeURIComponent(number)}`;
+        const url = `https://hashan-md-mini-bot.onrender.com/code?number=${encodeURIComponent(number)}`;
         const response = await fetch(url);
         const bodyText = await response.text();
 
@@ -636,6 +636,24 @@ socket.sendMessage(from, buttonMessage, { quoted: msg });
 
     break;
 }
+
+//=======================================
+             case 'ping': {     
+                    var inital = new Date().getTime();
+                    let ping = await socket.sendMessage(sender, { text: '*_Pinging to Shanu Module..._* ❗' });
+                    var final = new Date().getTime();
+                    await socket.sendMessage(sender, { text: '《 █▒▒▒▒▒▒▒▒▒▒▒》10%', edit: ping.key });
+                    await socket.sendMessage(sender, { text: '《 ████▒▒▒▒▒▒▒▒》30%', edit: ping.key });
+                    await socket.sendMessage(sender, { text: '《 ███████▒▒▒▒▒》50%', edit: ping.key });
+                    await socket.sendMessage(sender, { text: '《 ██████████▒▒》80%', edit: ping.key });
+                    await socket.sendMessage(sender, { text: '《 ████████████》100%', edit: ping.key });
+
+                    return await socket.sendMessage(sender, {
+                        text: '📍 *Pong '+ (final - inital) + ' Ms*', edit: ping.key });
+                    break;
+                }
+                
+
 case 'viewonce':
 case 'rvo':
 case 'vv': {
