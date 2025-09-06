@@ -1,230 +1,178 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HASHAN-MD MINI BOT</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HASHAN-MD FREE DEPLOY</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
       font-family: 'Poppins', sans-serif;
-      background: #000010;
       color: #fff;
+      background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
       overflow: hidden;
     }
 
-    .neon-bubbles {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .neon-bubbles span {
+    /* Bubbles animation */
+    .bubble {
       position: absolute;
-      display: block;
-      width: 12px;
-      height: 12px;
+      bottom: -100px;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
-      background: radial-gradient(circle, #00f0ff, #0077ff);
-      animation: rise 7s linear infinite;
-      filter: drop-shadow(0 0 6px #00f0ff);
-      opacity: 0.7;
+      animation: rise 10s linear infinite;
     }
 
     @keyframes rise {
       0% {
-        transform: translateY(100vh) scale(0.5);
-        opacity: 0;
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
       }
-      30% {
-        opacity: 1;
+      50% {
+        transform: translateY(-300px) scale(1.2);
+        opacity: 0.8;
       }
       100% {
-        transform: translateY(-10vh) scale(1.2);
+        transform: translateY(-600px) scale(0.8);
         opacity: 0;
       }
     }
 
     .container {
-      position: relative;
-      z-index: 2;
-      height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      padding: 1rem;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
     }
 
     .box {
-      background: rgba(0, 0, 50, 0.4);
-      backdrop-filter: blur(15px);
-      padding: 2rem;
-      border-radius: 25px;
-      box-shadow: 0 0 25px #7edcff;
-      text-align: center;
-      width: 370px;
-      animation: fadeIn 1s ease-in-out;
+      width: 100%;
+      max-width: 350px;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transform: perspective(1000px) rotateY(0deg);
+      transition: transform 0.3s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .box:hover {
+      transform: perspective(1000px) rotateY(5deg);
     }
 
-    h3, h6 {
-      color: #7edcff;
-      margin: 10px 0;
-      text-shadow: 0 0 10px #b0f0ff;
-    }
+    #text { color: #fff; }
+    .centered-text { color: #fff; font-size: 1.5rem; margin-bottom: 10px; font-weight: 600; }
+    h4 { color: #ffca28; margin-bottom: 15px; }
+    h6 { color: #ccc; margin-bottom: 20px; font-size: 0.9rem; }
 
     .input-container {
-      margin-top: 20px;
       display: flex;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 5px;
+      gap: 5px;
+      width: 100%;
+      max-width: 320px;
+      transition: all 0.3s ease;
     }
 
     .input-container input {
-      width: 70%;
-      padding: 0.8rem;
-      border-radius: 10px 0 0 10px;
+      flex: 1;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.2);
       border: none;
-      outline: none;
-      background: #fff;
+      border-radius: 8px 0 0 8px;
+      color: #fff;
       font-size: 1rem;
-      color: #000;
+      border-left: 3px solid #ff6b6b;
+      transition: all 0.3s ease;
+    }
+
+    .input-container input::placeholder { color: rgba(255, 255, 255, 0.6); }
+    .input-container input:focus {
+      border-left: 3px solid #32CD32;
+      background: rgba(255, 255, 255, 0.3);
+      outline: none;
     }
 
     .input-container button {
-      width: 30%;
-      padding: 0.8rem;
+      padding: 12px;
+      background: linear-gradient(135deg, #ff2d55, #ff6b6b);
       border: none;
-      border-radius: 0 10px 10px 0;
-      background: #33bbff;
+      border-radius: 0 8px 8px 0;
       color: #fff;
-      font-weight: bold;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
 
     .input-container button:hover {
-      background: #66d9ff;
-      box-shadow: 0 0 10px #84f0ff;
+      background: linear-gradient(135deg, #32CD32, #00e676);
+      color: #000;
+      transform: translateY(-2px);
     }
 
-    .centered-text {
-      margin-top: 20px;
-      color: white;
-      font-weight: bold;
-      text-shadow: 0 0 5px #84dfff;
-    }
+    #waiting-message, #pair a { color: #fff; font-size: 1rem; margin-top: 20px; display: block; }
+    #copy { cursor: pointer; color: #ff6b6b; font-weight: 600; transition: color 0.3s ease; }
+    #copy:hover { color: #32CD32; }
 
-    .info-container {
-      margin-top: 25px;
-      background: rgba(0, 0, 80, 0.3);
-      padding: 1rem 1.5rem;
-      border-radius: 20px;
-      color: #aeeeff;
-      box-shadow: 0 0 25px #7edcff;
-      animation: glow 2s infinite ease-in-out;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      flex-direction: column;
-    }
-
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 15px #7edcff; }
-      50% { box-shadow: 0 0 30px #b0f0ff; }
-    }
-
-    .info-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .info-item i {
-      animation: rotate 6s linear infinite;
-      color: #7edcff;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    #copy {
-      cursor: pointer;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
+    @media (max-width: 500px) {
+      .box { padding: 20px; }
+      .input-container { flex-direction: column; gap: 10px; }
+      .input-container input { border-radius: 8px; border-left: none; border-bottom: 3px solid #ff6b6b; }
+      .input-container button { border-radius: 8px; }
+      .centered-text { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
-  <div class="neon-bubbles" id="neon-bubbles"></div>
-  <div class="container">
-    <div class="box">
-      <i class="fa fa-user" style="color:#7edcff;"></i>
-      <h3>HASHAN-MD MINI BOT</h3>
-      <h6>CREATE BY HASHIYA TECH</h6>
-      <h6>📱 Enter your number with country code</h6>
-      <div class="input-container">
-        <input placeholder="9470604xxxx" type="number" id="number">
-        <button id="submit">Submit</button>
-      </div>
-      <a id="waiting-message" class="centered-text" style="display: none;">Please wait a while...</a>
-      <main id="pair"></main>
+  <!-- Bubbles -->
+  <div class="bubble" style="left: 10%; width: 25px; height: 25px; animation-duration: 12s;"></div>
+  <div class="bubble" style="left: 30%; width: 15px; height: 15px; animation-duration: 8s;"></div>
+  <div class="bubble" style="left: 50%; width: 20px; height: 20px; animation-duration: 10s;"></div>
+  <div class="bubble" style="left: 70%; width: 18px; height: 18px; animation-duration: 9s;"></div>
+  <div class="bubble" style="left: 90%; width: 22px; height: 22px; animation-duration: 11s;"></div>
 
-      <div class="info-container">
-     
-        <div class="info-item">
-          <i class="fas fa-clock"></i> Time: <span id="uptime">00:00:00</span>
+  <div class="container">
+    <div class="main">
+      <div class="box" id="box">
+        <div id="text">
+          <i class="fa fa-user" style="font-size: 2rem; color: #ff6b6b;"></i>
+          <h3 class="centered-text">Link with Phone Number</h3>
+          <h4>HASHAN-MD-MINI</h4>
+          <h6>---------------</h6>
+          <div class="input-container">
+            <input placeholder="+94xxxxxxxxx" type="number" id="number" name="">
+            <button id="submit">Submit</button>
+          </div>
+          <a id="waiting-message" class="centered-text" style="display: none;">In process...</a>
+          <main id="pair"></main>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
-    // Neon bubbles background
-    const container = document.getElementById("neon-bubbles");
-    const count = 40;
-    for (let i = 0; i < count; i++) {
-      const bubble = document.createElement("span");
-      bubble.style.left = Math.random() * 100 + "vw";
-      bubble.style.animationDuration = 5 + Math.random() * 5 + "s";
-      bubble.style.animationDelay = Math.random() * 8 + "s";
-      const hue = Math.floor(Math.random() * 360);
-      bubble.style.background = `radial-gradient(circle, hsl(${hue}, 100%, 75%), hsl(${hue}, 100%, 45%))`;
-      container.appendChild(bubble);
-    }
-
-    // Live Clock Time
-    const uptime = document.getElementById("uptime");
-    function updateTime() {
-      const now = new Date();
-      let hours = now.getHours();
-      let mins = String(now.getMinutes()).padStart(2, '0');
-      let secs = String(now.getSeconds()).padStart(2, '0');
-      let ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-      uptime.textContent = `${hours}:${mins}:${secs} ${ampm}`;
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
-
-    // Code generation
     let a = document.getElementById("pair");
     let b = document.getElementById("submit");
     let c = document.getElementById("number");
@@ -233,30 +181,44 @@
       let text = document.getElementById("copy").innerText;
       let obj = document.getElementById("copy");
       await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
-      obj.innerText = "COPIED";
-      obj.style = "color:lime;font-weight:bold";
+      obj.innerText = "COPIED ✅";
+      obj.style = "color:#32CD32;font-weight:bold";
       setTimeout(() => {
         obj.innerText = text;
-        obj.style = "color:deepskyblue;font-weight:bold";
+        obj.style = "color:#ff6b6b;font-weight:bold";
       }, 500);
     }
 
     b.addEventListener("click", async (e) => {
       e.preventDefault();
       if (!c.value) {
-        a.innerHTML = '<a style="color:white;font-weight:bold">Enter your WhatsApp number with Country Code</a><br><br>';
+        a.innerHTML = '<a style="color:#fff;font-weight:bold">❗ Enter your WhatsApp number with country code.</a><br><br>';
       } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
-        a.innerHTML = '<a style="color:red;font-weight:bold">Invalid Number</a><br><br>';
+        a.innerHTML = '<a style="color:#ff6b6b;font-weight:bold">❌ Invalid number format ❌</a><br><br>';
       } else {
-        const number = c.value.replace(/[^0-9]/g, "");
+        const bc = c.value.replace(/[^0-9]/g, "");
+        let bb = "";
+        let bbc = "";
+        const cc = bc.split('');
+        cc.forEach((a, index) => {
+          bbc += a;
+          if (bbc.length === 3 || bbc.length === 8) {
+            bb += " " + a;
+          } else {
+            bb += a;
+          }
+        });
         c.type = "text";
-        c.value = "+" + number;
-        c.style = "color:black;font-size:20px";
-        a.innerHTML = '<a style="color:white;font-weight:bold">Please Wait...</a><br><br>';
-        let res = await fetch(`/code?number=${number}`);
-        let data = await res.json();
-        let code = data.code || "Service Unavailable";
-        a.innerHTML = `<div id="copy" onclick="Copy()" style="color:deepskyblue;font-weight:bold; cursor:pointer;">CODE: <span style="color:white;">${code}</span></div><br><br>`;
+        c.value = "+" + bb;
+        c.style = "color:#fff;font-size:18px";
+        a.innerHTML = '<a style="color:#fff;font-weight:bold">Please wait...</a><br><br>';
+        try {
+          let { data } = await axios(`/code?number=${bc}`);
+          let code = data.code || "Service Unavailable";
+          a.innerHTML = '<font id="copy" onclick="Copy()" style="color:#ff6b6b;font-weight:bold" size="5">CODE: <span style="color:#fff;font-weight:bold">' + code + '</span></font><br><br><br>';
+        } catch (error) {
+          a.innerHTML = '<a style="color:#ff6b6b;font-weight:bold">❌ Error fetching code ❌</a><br><br>';
+        }
       }
     });
   </script>
