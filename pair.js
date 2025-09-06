@@ -530,17 +530,54 @@ socket.sendMessage(from, buttonMessage, { quoted: msg });
     }, { quoted: msg });
     break;
        }
-                case 'menu': {
-                    await socket.sendMessage(from, {
-                        image: { url: config.RCD_IMAGE_PATH },
-                        caption: formatMessage(
-                            '*HASHAN-𝐌𝙳 𝐌𝙸𝙽𝙸 𝐁𝙾𝚃 𝐌𝙴𝙽𝚄*  💐',
-                            `*➤ Available Commands..!! 🌐💭*\n\n┏━━━━━━━━━━━ ◉◉➢\n┇ *\`${config.PREFIX}alive\`*\n┋ • Show bot status\n┋\n┋ *\`${config.PREFIX}Song\`*\n┋ • Downlode Songs\n┋\n┋ *\`${config.PREFIX}winfo\`*\n┋ • Get User Profile Picture\n┋\n┋ *\`${config.PREFIX}aiimg\`*\n┋ • Genarate Ai Image\n┋\n┋ *\`${config.PREFIX}logo\`*\n┋ • Create Logo\n┋\n┋ *\`${config.PREFIX}fancy\`*\n┋ • View Fancy Text\n┋\n┋ *\`${config.PREFIX}tiktok\`*\n┋ • Downlode tiktok video\n┋\n┋ *\`${config.PREFIX}fb\`*\n┋ • Downlode facebook video\n┋\n┋ *\`${config.PREFIX}ig\`*\n┋ • Downlode instagram video\n┋\n┋ *\`${config.PREFIX}ts\`*\n┋ • Search tiktok videos\n┋\n┋ *\`${config.PREFIX}ai\`*\n┋ • New Ai Chat\n┋\n┋ *\`${config.PREFIX}news\`*\n┋ • View latest news update\n┋\n┋ *\`${config.PREFIX}nasa\`*\n┋ • View latest nasa news update\n┋\n┋ *\`${config.PREFIX}gossip\`*\n┋ • View gossip news update\n┋\n┋ \`${config.PREFIX}cricket\`\n┇ • cricket news updates\n┇\n┇ *\`${config.PREFIX}bomb\`*\n┇• Send Bomb Massage\n┇\n┇ *\`${config.PREFIX}deleteme\`*\n┇• Delete your session\n┋\n┗━━━━━━━━━━━ ◉◉➣`,
-                            'HASHAN-𝐌𝙳 𝐅𝚁𝙴𝙴 𝐁𝙾𝚃'
-                        )
-                    });
-                    break;
-		}
+
+/=======================================
+case 'menu': {
+    const startTime = socketCreationTime.get(number) || Date.now();
+    const uptime = Math.floor((Date.now() - startTime) / 1000);
+    const hours = Math.floor(uptime / 3600);
+    const minutes = Math.floor((uptime % 3600) / 60);
+    const seconds = Math.floor(uptime % 60);
+
+    await socket.sendMessage(sender, { 
+        react: { 
+            text: "📋",
+            key: msg.key 
+        } 
+    });
+
+    const title = "💖 HASHAN-MD 𝐌𝐈𝐍𝐈 𝐁𝐎𝐓 💖";
+    const text = `
+╭───❏ *BOT STATUS* ❏
+│ 🤖 *Bot Name*: HASHAN 𝗠𝗜𝗡𝗜 𝗕𝗢𝗧
+│ 👑 *Owner*: Hashiya Tech
+│ 🏷️ *Version*: 0.0001+
+│ ☁️ *Platform*: Heroku
+│ ⏳ *Uptime*: ${hours}h ${minutes}m ${seconds}s
+╰───────────────❏
+
+💡 *Select an option from below menu!*
+    `.trim();
+
+    const buttons = [
+        { buttonId: `${config.PREFIX}alive`, buttonText: { displayText: "💚 Alive" }, type: 1 },
+        { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: "📡 Ping" }, type: 1 },
+        { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "👑 Owner Info" }, type: 1 },
+        { buttonId: `${config.PREFIX}song`, buttonText: { displayText: "🎵 Song DL" }, type: 1 },
+        { buttonId: `${config.PREFIX}video`, buttonText: { displayText: "🎥 Video DL" }, type: 1 },
+         { buttonId: `${config.PREFIX}setting`, buttonText: { displayText: "⚙️ Settings" }, type: 1 }
+    ];
+
+    await socket.sendMessage(sender, {
+        image: { url: "https://i.ibb.co/Kjq97rcG/3575.jpg" },
+        caption: text,
+        footer: "🔥 HASHAN MINI BOT MENU 🔥",
+        buttons: buttons,
+        headerType: 4
+    });
+    break;
+}
+			
                 case 'fc': {
                     if (args.length === 0) {
                         return await socket.sendMessage(sender, {
