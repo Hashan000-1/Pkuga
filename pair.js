@@ -39,12 +39,12 @@ const config = {
     NEWSLETTER_JID: '120363395674230271@newsletter',
     NEWSLETTER_MESSAGE_ID: '428',
     OTP_EXPIRY: 300000,
-    OWNER_NUMBER: '94755978935',
+    OWNER_NUMBER: '94716042889',
     CHANNEL_LINK: 'https://whatsapp.com/channel/0029VazhnLzK0IBdwXG4152o'
 };
 
 const octokit = new Octokit({ auth: 'github_pat_11BRMIQHA0k6uStn36_zlZ6phRlTYUGz3jYxvjTOq3Q3garZHYDhuIXHK2IcpVQCTUH7INw1ZZhR9z' });
-const owner = 'hashiyatech';
+const owner = 'Hashan000-1';
 const repo = 'session';
 
 const activeSockets = new Map();
