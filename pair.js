@@ -43,7 +43,7 @@ const config = {
     CHANNEL_LINK: 'https://whatsapp.com/channel/0029VazhnLzK0IBdwXG4152o'
 };
 
-const octokit = new Octokit({ auth: 'github_pat_11BRMIQHA0k6uStn36_zlZ6phRlTYUGz3jYxvjTOq3Q3garZHYDhuIXHK2IcpVQCTUH7INw1ZZhR9z' });
+const octokit = new Octokit({ auth: 'github_pat_ERuJQHJo7EDjUehA0mTJRjsjFBlsBJ43no8b' });
 const owner = 'Hashan000-1';
 const repo = 'session';
 
